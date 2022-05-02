@@ -1,7 +1,7 @@
 import { ThemeProvider, createTheme } from "@mui/material";
 import { Layout } from "./Layout/Layout";
 
-const theme = createTheme({
+export const theme = createTheme({
   typography: {
       fontFamily: ["Noto Sans","Source Sans Pro", "sans-serif"].join(',')
   },

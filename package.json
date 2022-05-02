@@ -23,7 +23,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -43,5 +43,22 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "identity-obj-proxy": "^3.0.0",
+    "jest-svg-transformer": "^1.0.0",
+    "jest-transform-stub": "^2.0.0",
+    "ts-jest": "^27.1.4",
+    "ts-node": "^10.7.0"
+  },
+  "testing-library/no-debugging-utils": [
+    "error",
+    {
+      "utilsToCheckFor": {
+        "debug": false,
+        "logRoles": true,
+        "logDOM": true
+      }
+    }
+  ]
 }
