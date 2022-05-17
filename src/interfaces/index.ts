@@ -46,6 +46,7 @@ export interface DrawerList {
     icon: React.ReactNode
     subItems?: SubItemsType[];
     badge?: number;
+    path?: string;
     }
 export interface NavPropsInterface {
     sideState: boolean;

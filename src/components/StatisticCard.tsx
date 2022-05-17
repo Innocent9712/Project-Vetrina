@@ -6,7 +6,7 @@ export const StatisticCard = (props: CardInterface) => {
   return (
     <>
         <CardActions>{props.top}</CardActions>
-        <CardContent>{props.content}</CardContent>
+        <CardContent sx={{paddingInline: 1}}>{props.content}</CardContent>
         <CardActions>{props.bottom}</CardActions>
     </>
   )

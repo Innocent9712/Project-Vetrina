@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
 import {AttachMoneyOutlined, BrushOutlined, CreditCardOutlined, HelpOutlineOutlined, LanguageOutlined, LocalShippingOutlined, LogoutOutlined, Menu, PersonOutlineOutlined, RadarOutlined, SettingsOutlined, ShareOutlined, VisibilityOutlined, WidgetsOutlined} from '@mui/icons-material'
 import {useTheme, styled} from '@mui/material/styles'
-import {Divider, Drawer,List, ListItem, ListItemText, IconButton, Accordion, AccordionSummary, AccordionDetails, Badge, Box, Stack } from '@mui/material'
+import {Divider, Drawer,List, ListItem, ListItemText, IconButton, Accordion, AccordionSummary, AccordionDetails, Badge, Box, Stack, Typography, Select, MenuItem } from '@mui/material'
 import { ListItemIcon } from '@mui/material'
 import {ExpandMore, HomeOutlined, ShoppingCartOutlined, FormatListBulletedOutlined } from '@mui/icons-material'
 import { SubItemsType, DrawerList, NavPropsInterface } from '../../interfaces'
 import logo from '../../assets/logo.svg'
+import { Link } from 'react-router-dom'
 
 const drawerWidth = 240
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -24,6 +25,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     {
       name: "Dashboard",
       icon: <HomeOutlined color='primary' />,
+      path: '/'
     },
     {
       name: "Catalogue",
@@ -40,11 +42,13 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     {
       name: "Order",
       icon: <FormatListBulletedOutlined color='primary' />,
-      badge: 14
+      badge: 14,
+      path: '/order'
     },
     {
       name: "Customers",
-      icon: <PersonOutlineOutlined color='primary' />
+      icon: <PersonOutlineOutlined color='primary' />,
+      path: '/customer'
     },
     {
       name: "Marketing",
@@ -60,22 +64,28 @@ const DrawerHeader = styled('div')(({ theme }) => ({
           name: "Checkout Features"
         },
         {
-          name: "Post purchase conversion"
+          name: "Post purchase conversion",
+          path: '/ppc'
         },
         {
-          name: "Cart abandonment"
+          name: "Cart abandonment",
+          path: '/abandoned-cart'
         },
         {
-          name: "Timer checkout"
+          name: "Timer checkout",
+          path:'/timer-checkout'
         },
         {
-          name: "Self on Social"
+          name: "Self on Social",
+          path: '/self-on-social'
         },
         {
-          name: "Special Offer"
+          name: "Special Offer",
+          path: '/special-offer'
         },
         {
-          name: "Seasonal Offer"
+          name: "Seasonal Offer",
+          path: '/seasonal-offer'
         }
       ]
     },
@@ -128,9 +138,17 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     }
   ]
 
+  const sideNavStyling = {
+    active: {
+      color: 'secondary'
+    }
+  }
+
 
 export const SideNav  = ({sideState, handleState} : NavPropsInterface) => {
   const theme = useTheme();
+  const [currentPage, setCurrentPage] = useState('')
+
 
     return (
         <Drawer
@@ -163,6 +181,13 @@ export const SideNav  = ({sideState, handleState} : NavPropsInterface) => {
             <ListItem button key={item.name}
               disablePadding
               disableGutters
+              
+              sx={{
+                borderLeft: '3px solid',
+                borderColor: 'primary.light',
+                bgcolor: '#F7F7F7',
+              }}
+
             >
               {
                 item.subItems ? (
@@ -219,15 +244,17 @@ export const SideNav  = ({sideState, handleState} : NavPropsInterface) => {
                       </AccordionDetails>
                     </Accordion>
                 ) : (
-                  <Stack direction='row' sx={{margin: '10px'}} alignItems='center'>
-                    <ListItemIcon>
-                      {item.icon}
-                    </ListItemIcon>
-                    <ListItemText primary={item.name} />
-                    {
-                      item.badge && <Badge sx={{marginLeft: '100px'}}badgeContent={item.badge} color='success' />
-                    }
-                  </Stack>
+                    // <Link to=''>
+                      <Stack direction='row' sx={{margin: '10px'}} alignItems='center'>
+                        <ListItemIcon>
+                          {item.icon}
+                        </ListItemIcon>
+                        <ListItemText primary={item.name}  primaryTypographyProps={{color: 'primary'}} />
+                        {
+                          item.badge && <Badge sx={{marginLeft: '100px'}}badgeContent={item.badge} color='success' />
+                        }
+                      </Stack>
+                    // </Link>
                 )
               }
             </ListItem>
@@ -240,10 +267,16 @@ export const SideNav  = ({sideState, handleState} : NavPropsInterface) => {
               <ListItemIcon>
                 {item.icon}
               </ListItemIcon>
-              <ListItemText primary={item.name} />
+              <ListItemText primary={item.name}  primaryTypographyProps={{color: 'primary'}} />
             </ListItem>
           ))}
         </List>
+        <Stack my={4} mx={2} spacing={2} >
+          <Typography color='primary'>Select your shop</Typography>
+          <Select value="Fenoh Store">
+            <MenuItem value="Fenoh Store" color='primary'>Fenoh Store</MenuItem>
+          </Select>
+        </Stack>
       </Drawer>
     )
 }

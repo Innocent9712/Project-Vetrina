@@ -14,21 +14,26 @@ import {LinkOutInterface} from '../interfaces'
 
 // }))
 
+const linkStyle = {
+    button: {
+        paddingInline: 0,
+        textTransform: 'none',
+    },
+    text: {
+        marginRight: '10px',
+        textAlign: 'left',
+    }
+}
 export const LinkOut = ({text, icon, linkColor}: LinkOutInterface) => {
-    // const red = 'red'
-    const red = '#F3A35C'
     return (
         <Button
             sx={{
-                textTransform: 'none',
+                ...linkStyle.button,
                 color: `${linkColor}`
             }}
         >
             <Link
-                sx={{
-                    marginRight: '10px',
-                    textAlign: 'left',
-                }}
+                sx={linkStyle.text}
                 color={linkColor}
             >{text}</Link>
             {icon}
