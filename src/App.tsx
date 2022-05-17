@@ -1,4 +1,5 @@
 import { ThemeProvider, createTheme } from "@mui/material";
+import { BrowserRouter } from "react-router-dom";
 import { Layout } from "./Layout/Layout";
 
 export const theme = createTheme({
@@ -19,9 +20,9 @@ export const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div>
+      <BrowserRouter>
         <Layout />
-      </div>
+      </BrowserRouter>
     </ThemeProvider>
       
   );

@@ -50,7 +50,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     {
       name: "Customers",
       icon: <PersonOutlineOutlined color='primary' />,
-      path: '/customer'
+      path: 'customer'
     },
     {
       name: "Marketing",
@@ -58,19 +58,19 @@ const DrawerHeader = styled('div')(({ theme }) => ({
       subItems: [
         {
           name: "Discount codes",
-          path: '/discount-codes'
+          path: 'discount-codes'
         },
         {
           name: "Exit intent",
-          path: '/exit-intent'
+          path: 'exit-intent'
         },
         {
           name: "Checkout Features",
-          path: '/checkout-features'
+          path: 'checkout-features'
         },
         {
           name: "Post purchase conversion",
-          path: '/post-purchase-conversion'
+          path: 'post-purchase-conversion'
         },
         {
           name: "Cart abandonment",
@@ -139,15 +139,18 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   const ExtraItems: DrawerList[] = [
     {
       name: "Customer Support",
-      icon: <HelpOutlineOutlined color='primary' />
+      icon: <HelpOutlineOutlined color='primary' />,
+      path: 'customer-support'
     },
     {
       name: "Share your shop",
-      icon: <ShareOutlined color='primary' />
+      icon: <ShareOutlined color='primary' />,
+      path: 'share-your-shop'
     },
     {
       name: "View your shop",
-      icon: <VisibilityOutlined color='primary' />
+      icon: <VisibilityOutlined color='primary' />,
+      path: 'view-your-shop'
     }
   ]
 
@@ -262,13 +265,13 @@ export const SideNav  = ({sideState, handleState, changeHeader} : NavPropsInterf
                         <List sx={sideNavStyling.acDetailList}>
                           {
                             item.subItems.map((subItem: SubItemsType) => (
-                              <Box width='100%'height='50px' sx={sideNavStyling.acDetailBox}>
+                              <Box width='100%'height='50px' sx={sideNavStyling.acDetailBox} key={subItem.name}>
                                   <ListItemText 
                                   primary={subItem.name}
                                   primaryTypographyProps={{color: 'primary'}}
-                                  key={subItem.name}
                                   color='primary'
-                                    sx={sideNavStyling.acDetailListItem}
+                                  sx={sideNavStyling.acDetailListItem}
+                                  onClick={()=> changeHeader?.(subItem?.name, subItem?.path!)}
                                   />
                               </Box>
                             ))
@@ -294,7 +297,7 @@ export const SideNav  = ({sideState, handleState, changeHeader} : NavPropsInterf
         <Divider />
         <List>
           {ExtraItems.map((item, index) => (
-            <ListItem button key={item.name}>
+            <ListItem button key={item.name} onClick={()=> changeHeader?.(item?.name, item?.path!)}>
               <ListItemIcon sx={sideNavStyling.listItemIcon}>
                 {item.icon}
               </ListItemIcon>
