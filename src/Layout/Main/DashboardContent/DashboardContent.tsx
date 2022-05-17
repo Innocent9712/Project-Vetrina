@@ -28,15 +28,25 @@ import { CStop } from './CustomerSupport/CStop'
 import { CSContent } from './CustomerSupport/CSContent'
 import Hero from './Hero'
 
+const dashboardStyling = {
+    stackOne : {
+        background: 'linear-gradient(180deg, rgba(33,184,249,1) 5%, rgba(33,184,249,1) 10%, rgba(255,255,255,1) 20%)',
+    },
+    cardOne : {
+        bgcolor: '#F3A35C'
+    },
+    cardOneText : {
+        fontSize: '1.7em',
+        color: 'primary.contrastText',
+    }
+}
+
 export const DashboardContent = () => {
     return (
         <Stack spacing={3} justifyContent='center' alignItems='center'
-            sx={{
-                background: 'linear-gradient(180deg, rgba(33,184,249,1) 5%, rgba(33,184,249,1) 10%, rgba(255,255,255,1) 20%)',
-            }}
+            sx={dashboardStyling.stackOne}
         >
             <Hero />
-
             <Grid container columns={{xs: 1, md: 6}} width='80vw' justifyContent='center'>
                 <Grid item xs={1} md={4} >
                     <Grid container spacing={3} columns={{xs: 1, md: 4}}>
@@ -52,9 +62,7 @@ export const DashboardContent = () => {
                             </Grid>
                             <Grid item xs={1} md={2}>
                                 <Card
-                                    sx={{
-                                        bgcolor: '#F3A35C'
-                                    }}
+                                    sx={dashboardStyling.cardOne}
                                 >
                                     <CardContent>
                                         <Stack spacing={4}>
@@ -64,10 +72,7 @@ export const DashboardContent = () => {
                                                 spacing={2}
                                             >
                                                 <Stack width='65%' alignItems='flex-start'>
-                                                    <Typography variant='h6' sx={{
-                                                        fontSize: '1.7em',
-                                                        color: 'primary.contrastText',
-                                                    }}>Sell your products on your exclusive APP published on the stores </Typography>
+                                                    <Typography variant='h6' sx={dashboardStyling.cardOneText}>Sell your products on your exclusive APP published on the stores </Typography>
                                                     <LinkOut text='Show more' icon={<ArrowForward />} linkColor='primary.contrastText' />
                                                 </Stack>
                                                 <Stack>

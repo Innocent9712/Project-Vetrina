@@ -53,7 +53,7 @@ const AppBar = styled(MuiAppBar, {
     }),
   }));
 
-export const Dashboard = ({sideState, handleState}:  NavPropsInterface) => {
+export const Dashboard = ({sideState, handleState, headerText}:  NavPropsInterface) => {
     return (
         <AppBar position='sticky' open={sideState}
             sx={DashboardStyling.appBar}
@@ -75,7 +75,7 @@ export const Dashboard = ({sideState, handleState}:  NavPropsInterface) => {
                         variant='body1'
                         component='h2'
                         sx={DashboardStyling.title}
-                    >Dashboard</Typography>
+                    >{headerText}</Typography>
                 </Stack>
                 <Badge badgeContent={2} color='error'>
                     <Box>
