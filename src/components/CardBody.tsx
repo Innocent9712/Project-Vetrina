@@ -6,7 +6,7 @@ export const CardBody = ({children}:  CardBodyProps) => {
   return (
     <Card>
       <Stack sx={{
-        padding: '8px',
+        padding: 3,
         margin: 0,
       }} 
       height='16rem'

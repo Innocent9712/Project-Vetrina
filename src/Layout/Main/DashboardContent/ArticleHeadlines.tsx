@@ -21,7 +21,7 @@ return (
     <Card sx={{padding: '15px'}}>
         <Stack justifyContent='space-between' direction='row' sx={{marginBottom: '3rem'}}>
             <CardTop icon={<TextSnippetOutlined color='primary' />} title='Latest news' />
-            <Box width='33%' sx={{padding: 0, margin: 0,}}>
+            <Box width='33%' sx={{padding: 0, margin: 0, display: 'flex', justifyContent: 'flex-end'}}>
                 <LinkOut text='Visit our blog' icon={<CallMadeOutlined />} linkColor='primary.light' />
             </Box>
         </Stack>

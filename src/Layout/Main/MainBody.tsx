@@ -3,6 +3,8 @@ import {Container, styled} from '@mui/material'
 import {  Box } from '@mui/material';
 import {DashboardContent } from './DashboardContent/DashboardContent';
 import { MainPropsInterface } from '../../interfaces';
+import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import {PlaceHolderText} from '../../components/PlaceHolderText'
 
 const drawerWidth = 240;
 
@@ -10,7 +12,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   open?: boolean;
 }>(({ theme, open }) => ({
   flexGrow: 1,
-  padding: theme.spacing(3),
+  padding: theme.spacing(1),
   transition: theme.transitions.create('margin', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -25,21 +27,31 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   }),
 }));
 
+const mainStyles = {
+  container: {
+    marginLeft: '235px',
+  },
+  innerContainer: {
+    // maxWidth: '1200px', 
+    marginInline: 'auto'
+  },
+}
+
 
 
 export const MainBody = ({sideState}: MainPropsInterface) => {
   return (
-    <Main open={sideState}>
-      <Box
-        sx={{
-          marginLeft: '245px',
-          marginRight: '1rem',
-        }}
-      >
-        <Container sx={{maxWidth: '1200px', marginInline: 'auto'}}>
-          <DashboardContent />
-        </Container>
-      </Box>
-    </Main>
+    <BrowserRouter>
+      <Main open={sideState}>
+        <Box
+          sx={mainStyles.container}
+        >
+            <Routes>      
+              <Route path='/' element={ <DashboardContent />} />
+              <Route path='order' element={<div>Order</div>} />
+            </Routes> 
+        </Box>
+      </Main>
+    </BrowserRouter>
   )
 }

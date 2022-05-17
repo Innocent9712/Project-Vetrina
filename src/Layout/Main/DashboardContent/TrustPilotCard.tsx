@@ -8,11 +8,11 @@ export const TrustPilotCard = () => {
   return (
         <Card sx={{bgcolor:'#000032',}}>
             <CardContent>
-                <Stack spacing={2} color='primary.contrastText'>
+                <Stack spacing={4} color='primary.contrastText'>
                     <Box>
                         <img src={trustPilotLogo} alt='trust pilot logo' />
                     </Box>
-                    <Typography variant='body2'>
+                    <Typography variant='body2' sx={{fonstSize: '1.3rem'}}>
                         Show us your love by leaving a <Typography component='span' color='#00C48C'>positive</Typography> review on trust pilot 
                         and receive the extension of <Typography component='span' sx={{fontWeight: '500'}}>50 additional products</Typography>
                     </Typography>

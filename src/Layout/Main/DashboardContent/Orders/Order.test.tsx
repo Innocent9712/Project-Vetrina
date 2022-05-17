@@ -9,6 +9,11 @@ describe('Test should', () => {
         render(<OrdersTop />)
     })
 
+    it('confirm that dropdown list is loaded', () => {
+        render(<OrdersTop />)
+        screen.getByRole('button', {name: 'This Month'})
+    })
+
     it('render Order Content', () => {
         render(<OrderContent />)
     })

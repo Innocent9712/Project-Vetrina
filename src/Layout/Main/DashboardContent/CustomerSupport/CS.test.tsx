@@ -10,5 +10,6 @@ describe('Test should', () => {
 
     it('render Customer Support Content', () => {
         render(<CSContent />)
+        expect(screen.getByRole('button', {name: 'Contact Us'}))
     })
 })

@@ -9,6 +9,11 @@ describe('Test should', () => {
 
     it('render ConfigShop Content', () => {
         render(<ConfigShopContent />)
-})
+    })
 
+    it('checks that component returns expected data', ()=> {
+        render(<ConfigShopContent />)
+        const text = screen.getByRole('heading', {name: '45%'})
+        expect(text).toBeInTheDocument()
+    })
 })

@@ -15,24 +15,44 @@ const getRandomReadTime = (): string => {
 }
 
 export const bingApi = async (setStateFnc: React.Dispatch<React.SetStateAction<ResponseInterface[]>>) => {
-    const arr: ResponseInterface[] = []
-    fetch('https://bing-news-search1.p.rapidapi.com/news/trendingtopics?textFormat=Raw&safeSearch=Off', options)
-        .then(response => response?.json())
-        .then(response => {
-            response.value?.forEach((element: any) => {
-                const tempObj: ResponseInterface = {
-                    img: element?.image?.url ?? 'no image', 
-                    title: element?.name ?? 'no name',
-                    description: element?.query?.text ?? 'no description',
-                    url: element?.webSearchUrl ?? 'no url',
-                    readTime: getRandomReadTime()
-                };
+    // const arr: ResponseInterface[] = []
+    // fetch('https://bing-news-search1.p.rapidapi.com/news/trendingtopics?textFormat=Raw&safeSearch=Off', options)
+    //     .then(response => response?.json())
+    //     .then(response => {
+    //         response.value?.forEach((element: any) => {
+    //             const tempObj: ResponseInterface = {
+    //                 img: element?.image?.url ?? 'no image', 
+    //                 title: element?.name ?? 'no name',
+    //                 description: element?.query?.text ?? 'no description',
+    //                 url: element?.webSearchUrl ?? 'no url',
+    //                 readTime: getRandomReadTime()
+    //             };
+
+    //             arr.push(tempObj)
+    //         });
+    //         console.log(arr);
+    //         setStateFnc(arr);
+            
+    //     })
+    //     .catch(err => console.error(err));
+
+    try {
+        const arr: ResponseInterface[] = []
+        const response = await fetch('https://bing-news-search1.p.rapidapi.com/news/trendingtopics?textFormat=Raw&safeSearch=Off', options)
+        const headlines = await response.json()
+        headlines?.value?.forEach((element: any) => {
+            const tempObj: ResponseInterface = {
+                img: element?.image?.url ?? 'no image', 
+                title: element?.name ?? 'no name',
+                description: element?.query?.text ?? 'no description',
+                url: element?.webSearchUrl ?? 'no url',
+                readTime: getRandomReadTime()
+            };
 
                 arr.push(tempObj)
             });
-            console.log(arr);
-            setStateFnc(arr);
-            
-        })
-        .catch(err => console.error(err));
+                setStateFnc(arr);
+    } catch (err) {
+        // console.error(err)
+    }
 }
