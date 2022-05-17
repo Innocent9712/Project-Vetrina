@@ -175,6 +175,9 @@ const DrawerHeader = styled('div')(({ theme }) => ({
       borderLeft: '3px solid',
       borderColor: 'primary.light',
       bgcolor: '#F7F7F7',
+      '& .MuiTypography-root, .MuiSvgIcon-root' : {
+        color: 'primary.light'
+      },
     },
     accordion : {
       boxShadow: 0,
@@ -213,6 +216,11 @@ export const SideNav  = ({sideState, handleState, changeHeader} : NavPropsInterf
   const theme = useTheme();
   const [currentPage, setCurrentPage] = useState('/')
 
+  const handleClick = (name: string, path: string) => {
+    setCurrentPage(path)
+    changeHeader?.(name, path)
+  }
+
 
     return (
       <Drawer
@@ -235,9 +243,7 @@ export const SideNav  = ({sideState, handleState, changeHeader} : NavPropsInterf
             <ListItem button key={item.name}
               disablePadding
               disableGutters
-              
-              sx={sideNavStyling.listItem}
-
+              sx={{...sideNavStyling.listItem,...(currentPage === item.path && sideNavStyling.activeListItem)}}
             >
               {
                 item.subItems ? (
@@ -271,7 +277,7 @@ export const SideNav  = ({sideState, handleState, changeHeader} : NavPropsInterf
                                   primaryTypographyProps={{color: 'primary'}}
                                   color='primary'
                                   sx={sideNavStyling.acDetailListItem}
-                                  onClick={()=> changeHeader?.(subItem?.name, subItem?.path!)}
+                                  onClick={()=> handleClick(subItem?.name, subItem?.path!)}
                                   />
                               </Box>
                             ))
@@ -280,7 +286,7 @@ export const SideNav  = ({sideState, handleState, changeHeader} : NavPropsInterf
                       </AccordionDetails>
                     </Accordion>
                 ) : (
-                  <Stack direction='row' sx={sideNavStyling.listItem} alignItems='center' onClick={()=> changeHeader?.(item?.name, item?.path!)}>
+                  <Stack direction='row' sx={sideNavStyling.listItem} alignItems='center' onClick={()=> handleClick(item?.name, item?.path!)}>
                         <ListItemIcon sx={sideNavStyling.listItemIcon}>
                           {item.icon}
                         </ListItemIcon>
@@ -297,11 +303,23 @@ export const SideNav  = ({sideState, handleState, changeHeader} : NavPropsInterf
         <Divider />
         <List>
           {ExtraItems.map((item, index) => (
-            <ListItem button key={item.name} onClick={()=> changeHeader?.(item?.name, item?.path!)}>
-              <ListItemIcon sx={sideNavStyling.listItemIcon}>
-                {item.icon}
-              </ListItemIcon>
-              <ListItemText primary={item.name}  primaryTypographyProps={{color: 'primary'}} />
+            <ListItem 
+              button 
+              disablePadding
+              disableGutters
+              key={item.name} 
+              onClick={()=> handleClick(item?.name, item?.path!)}
+              sx={{...sideNavStyling.listItem,...(currentPage === item.path && sideNavStyling.activeListItem), paddingLeft: 0}}
+            >
+               <Stack direction='row' sx={sideNavStyling.listItem} alignItems='center' onClick={()=> handleClick(item?.name, item?.path!)}>
+                        <ListItemIcon sx={sideNavStyling.listItemIcon}>
+                          {item.icon}
+                        </ListItemIcon>
+                        <ListItemText primary={item.name}  primaryTypographyProps={{color: 'primary'}} />
+                        {
+                          item.badge && <Badge sx={sideNavStyling.badge}badgeContent={item.badge} color='success' />
+                        }
+                  </Stack>
             </ListItem>
           ))}
         </List>
