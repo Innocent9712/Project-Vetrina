@@ -7,6 +7,7 @@ import {styled} from '@mui/material/styles'
 
 export const Layout = () => {
     const [sideNavState, setSideNavState] = useState<boolean>(false)
+    const [headerText, setHeaderText] = useState('Dashboard')
 
     const handleOpen=()=> {
         setSideNavState(true)
@@ -17,7 +18,7 @@ export const Layout = () => {
     }
     return (
         <div> 
-            <Dashboard sideState={sideNavState} handleState={handleOpen} />
+            <Dashboard sideState={sideNavState} handleState={handleOpen} headerText={headerText} />
             <SideNav sideState={sideNavState} handleState={handleClose} />
             <MainBody sideState={sideNavState}/>
         </div>

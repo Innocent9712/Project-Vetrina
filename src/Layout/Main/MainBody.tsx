@@ -48,7 +48,8 @@ export const MainBody = ({sideState}: MainPropsInterface) => {
         >
             <Routes>      
               <Route path='/' element={ <DashboardContent />} />
-              <Route path='order' element={<div>Order</div>} />
+              <Route path='order' element={<PlaceHolderText text="Order" />} />
+              <Route path='catalog-1' element={<PlaceHolderText text="Catalog 1" />} />
             </Routes> 
         </Box>
       </Main>

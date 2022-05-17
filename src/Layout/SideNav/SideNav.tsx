@@ -32,10 +32,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
       icon: <ShoppingCartOutlined color='primary' />,
       subItems: [
         {
-          name: "Catalog 1"
+          name: "Catalog 1",
+          path: '/catalog-1'
         },
         {
-          name: "Catalog 2"
+          name: "Catalog 2",
+          path: '/catalog-2'
         }
       ]
     },
@@ -55,17 +57,20 @@ const DrawerHeader = styled('div')(({ theme }) => ({
       icon: <RadarOutlined color='primary' />,
       subItems: [
         {
-          name: "Discount codes"
+          name: "Discount codes",
+          path: '/discount-codes'
         },
         {
-          name: "Exit intent"
+          name: "Exit intent",
+          path: '/exit-intent'
         },
         {
-          name: "Checkout Features"
+          name: "Checkout Features",
+          path: '/checkout-features'
         },
         {
           name: "Post purchase conversion",
-          path: '/ppc'
+          path: '/post-purchase-conversion'
         },
         {
           name: "Cart abandonment",
@@ -91,35 +96,43 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     },
     {
       name: "Delivery Option",
-      icon: <LocalShippingOutlined color='primary' />
+      icon: <LocalShippingOutlined color='primary' />,
+      path: '/delivery-option'
     },
     {
       name: " Payment Option",
-      icon: <AttachMoneyOutlined color='primary' />
+      icon: <AttachMoneyOutlined color='primary' />,
+      path: '/payment-option'
     },
     {
       name: "Store Design",
-      icon: <BrushOutlined color='primary' />
+      icon: <BrushOutlined color='primary' />,
+      path: '/store-design'
     },
     {
       name: "Subscription",
-      icon: <CreditCardOutlined color='primary' />
+      icon: <CreditCardOutlined color='primary' />,
+      path: '/subscription'
     },
     {
       name: "Integration",
-      icon: <LanguageOutlined color='primary' />
+      icon: <LanguageOutlined color='primary' />,
+      path: '/integration'
     },
     {
       name: "Extensions",
-      icon: <WidgetsOutlined color='primary' />
+      icon: <WidgetsOutlined color='primary' />,
+      path: '/extensions'
     },
     {
       name: "Settings",
-      icon: <SettingsOutlined color='primary' />
+      icon: <SettingsOutlined color='primary' />,
+      path: '/settings'
     },
     {
       name: "Log out",
-      icon: <LogoutOutlined color='primary' />
+      icon: <LogoutOutlined color='primary' />,
+      path: '/logout'
     },
   ]
 
@@ -139,40 +152,78 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ]
 
   const sideNavStyling = {
+    drawer : {
+      width: drawerWidth,
+      flexShrink: 0,
+      '&.MuiDrawer-paper': {
+        width: drawerWidth,
+        boxSizing: 'border-box',
+        '&::-webkit-scrollbar': {
+          width: '5px'
+        }
+      },
+    },
+    DHeader : {
+      display: 'flex', 
+      justifyContent: 'space-between'
+    },
+    DH_Box : {marginInline: '10px'},
+    activeListItem : {
+      borderLeft: '3px solid',
+      borderColor: 'primary.light',
+      bgcolor: '#F7F7F7',
+    },
+    accordion : {
+      boxShadow: 0,
+      width: '100%',
+    },
+    acSummary : {
+      paddingRight: '20px',
+      marginInline: '10px',
+      '&.MuiButtonBase-root.MuiAccordionSummary-root' : {
+        paddingLeft: 0,
+      }
+    },
+    acDetailContainer : {
+      padding: 0,
+    },
+    acDetailList : {margin: 0},
+    acDetailBox : {
+      bgcolor: '#E9F8FE',
+      display: 'flex',
+      alignItems: 'center'
+    },
+    acDetailListItem : {
+      marginLeft: '40px',
+    },
+    listItem : {margin: '10px'},
+    listItemIcon : {'&.MuiListItemIcon-root' : {minWidth: '30px'}},
+    badge: {marginLeft: '120px'},
     active: {
       color: 'secondary'
     }
+
   }
 
 
-export const SideNav  = ({sideState, handleState} : NavPropsInterface) => {
+export const SideNav  = ({sideState, handleState, changeHeader} : NavPropsInterface) => {
   const theme = useTheme();
-  const [currentPage, setCurrentPage] = useState('')
+  const [currentPage, setCurrentPage] = useState('/')
 
 
     return (
-        <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-            '::-webkit-scrollbar': {
-              width: '5px'
-            }
-          },
-        }}
+      <Drawer
+        sx={sideNavStyling.drawer}
         variant="persistent"
         anchor="left"
         open={sideState}
       >
-        <DrawerHeader sx={{display: 'flex', justifyContent: 'space-between'}}>
-          <Box sx={{marginInline: '10px'}}>
+        <DrawerHeader sx={sideNavStyling.DHeader}>
+          <Box sx={sideNavStyling.DH_Box}>
             <img src={logo} alt='logo' />
           </Box>
           <IconButton onClick={handleState}>
-            <Menu color='primary' /> 
+            <Menu color='primary'  /> 
           </IconButton>
         </DrawerHeader>
         <Divider />
@@ -182,30 +233,20 @@ export const SideNav  = ({sideState, handleState} : NavPropsInterface) => {
               disablePadding
               disableGutters
               
-              sx={{
-                borderLeft: '3px solid',
-                borderColor: 'primary.light',
-                bgcolor: '#F7F7F7',
-              }}
+              sx={sideNavStyling.listItem}
 
             >
               {
                 item.subItems ? (
                     <Accordion disableGutters
-                      sx={{
-                        boxShadow: 0,
-                        width: '100%',
-                      }}
+                      sx={sideNavStyling.accordion}
                     >
                       <AccordionSummary
                         expandIcon={<ExpandMore />}
-                        sx={{
-                          padding: 0,
-                          marginInline: '10px'
-                        }}
+                        sx={sideNavStyling.acSummary}
                       >
                         <Stack alignItems='center' direction='row'>
-                          <ListItemIcon>
+                          <ListItemIcon sx={sideNavStyling.listItemIcon}>
                             {item.icon}
                           </ListItemIcon>
                           <ListItemText 
@@ -216,26 +257,18 @@ export const SideNav  = ({sideState, handleState} : NavPropsInterface) => {
                         </Stack>
                       </AccordionSummary>
                       <AccordionDetails
-                        sx={{
-                          padding: 0,
-                        }}
+                        sx={sideNavStyling.acDetailContainer}
                       >
-                        <List sx={{margin: 0}}>
+                        <List sx={sideNavStyling.acDetailList}>
                           {
                             item.subItems.map((subItem: SubItemsType) => (
-                              <Box width='100%'height='50px' sx={{
-                                bgcolor: '#E9F8FE',
-                                display: 'flex',
-                                alignItems: 'center'
-                              }}>
+                              <Box width='100%'height='50px' sx={sideNavStyling.acDetailBox}>
                                   <ListItemText 
                                   primary={subItem.name}
                                   primaryTypographyProps={{color: 'primary'}}
                                   key={subItem.name}
                                   color='primary'
-                                    sx={{
-                                      marginLeft: '65px',
-                                    }}
+                                    sx={sideNavStyling.acDetailListItem}
                                   />
                               </Box>
                             ))
@@ -244,17 +277,15 @@ export const SideNav  = ({sideState, handleState} : NavPropsInterface) => {
                       </AccordionDetails>
                     </Accordion>
                 ) : (
-                    // <Link to=''>
-                      <Stack direction='row' sx={{margin: '10px'}} alignItems='center'>
-                        <ListItemIcon>
+                  <Stack direction='row' sx={sideNavStyling.listItem} alignItems='center' onClick={()=> changeHeader?.(item?.name, item?.path!)}>
+                        <ListItemIcon sx={sideNavStyling.listItemIcon}>
                           {item.icon}
                         </ListItemIcon>
                         <ListItemText primary={item.name}  primaryTypographyProps={{color: 'primary'}} />
                         {
-                          item.badge && <Badge sx={{marginLeft: '100px'}}badgeContent={item.badge} color='success' />
+                          item.badge && <Badge sx={sideNavStyling.badge}badgeContent={item.badge} color='success' />
                         }
-                      </Stack>
-                    // </Link>
+                  </Stack>
                 )
               }
             </ListItem>
@@ -264,7 +295,7 @@ export const SideNav  = ({sideState, handleState} : NavPropsInterface) => {
         <List>
           {ExtraItems.map((item, index) => (
             <ListItem button key={item.name}>
-              <ListItemIcon>
+              <ListItemIcon sx={sideNavStyling.listItemIcon}>
                 {item.icon}
               </ListItemIcon>
               <ListItemText primary={item.name}  primaryTypographyProps={{color: 'primary'}} />

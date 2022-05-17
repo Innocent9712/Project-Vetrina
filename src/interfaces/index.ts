@@ -51,6 +51,8 @@ export interface DrawerList {
 export interface NavPropsInterface {
     sideState: boolean;
     handleState: ()=> void;
+    headerText?: string;
+    changeHeader?: (name: string, path: string) => void;
 }
 
 /** Api Interface */
