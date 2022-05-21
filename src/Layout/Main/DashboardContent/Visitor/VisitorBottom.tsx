@@ -4,6 +4,6 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 export const VisitorBottom = () => {
     return (
-        <LinkOut text='Do you want more visits? contact us' icon={<ArrowForwardIcon />} linkColor='primary.light' />
+        <LinkOut text='Do you want more visits? Contact us!' icon={<ArrowForwardIcon />} linkColor='primary.light' />
     )
 }
