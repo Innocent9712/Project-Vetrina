@@ -16,7 +16,10 @@ const headlineStyling = {
         display: 'flex', 
         justifyContent: 'flex-end'
     },
-    gridOne : {height: '500px', overflowX: 'auto'},
+    gridOne : {
+        // height: '500px', 
+        // overflowX: 'auto'
+    },
     childCard : {
         display: 'flex',
         justifyContent: 'space-between',
@@ -25,13 +28,13 @@ const headlineStyling = {
     },
     stackTwo : {margin: '0.5rem auto'},
     title : {
-        fontSize: '0.7rem', 
+        fontSize: '0.9rem', 
         fontWeight: '500', 
         color:'primary.light', 
         textTransform: 'uppercase'
     },
-    description : {fontSize: '0.8rem'},
-    read : {fontWeight: '300', fontSize: '0.6rem'},
+    description : {fontSize: '1rem'},
+    read : {fontWeight: '300', fontSize: '0.7rem'},
 
 }
 
@@ -40,7 +43,7 @@ export const ArticleHeadlines = () => {
     const tempArr = new Array(10).fill(1)
 
     useEffect(() => {
-        bingApi(setArticles)
+        bingApi(setArticles, 'https://bing-news-search1.p.rapidapi.com/news/trendingtopics?textFormat=Raw&safeSearch=Off')
         console.log('articles', articles);
     }, [])
     
@@ -74,7 +77,8 @@ export const ArticleHeadlines = () => {
                 }
                 {
                     articles && 
-                    articles.map((article: ResponseInterface) => (
+                    articles.map((article: ResponseInterface, id) => (
+                        id < 8 &&
                         <Grid item key={article.title} xs={4} md={3}>
                             <Stack direction='row' spacing={2} alignItems='center' sx={headlineStyling.stackTwo}>
                                 <Box width='20%'>
@@ -86,7 +90,6 @@ export const ArticleHeadlines = () => {
                                     <Typography variant='body2' color='primary' sx={headlineStyling.read}>{article.readTime}</Typography>
                                 </Stack>
                             </Stack>
-
                         </Grid>
                     ))
                 }
