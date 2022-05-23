@@ -1,6 +1,11 @@
 /** Components */
 export interface CardBodyProps {
-    children: React.ReactNode
+    children: React.ReactNode;
+    // sx?: {[key: string]: any}
+    sx?: {
+        paper?: any;
+        stack?: any;
+    }
 }
 
 export interface CardTopInterface {
@@ -13,6 +18,7 @@ export interface LinkOutInterface {
     text: string;
     icon?: React.ReactNode;
     linkColor: string;
+    font?: string;
 }
 
 export interface CardInterface {

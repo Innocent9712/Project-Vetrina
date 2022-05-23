@@ -2,7 +2,7 @@ import React from 'react'
 import { CardTop } from '../../../../components/CardTop'
 import { FormatListBulletedOutlined } from '@mui/icons-material'
 
-const period = ['This Month', 'This Week', 'Today']
+const period = ['This month', 'This week', 'Today']
 
 
 export const OrdersTop = () => {

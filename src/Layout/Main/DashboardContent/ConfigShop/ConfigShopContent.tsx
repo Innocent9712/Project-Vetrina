@@ -4,7 +4,7 @@ import React from 'react'
 
 const configStyles = {
     mainText : {
-        fontSize: '3rem', 
+        fontSize: '2.5rem', 
         fontWeight: '500'
     },
     secondaryText: {

@@ -1,22 +1,30 @@
 import React from 'react'
-import { Card, Stack } from '@mui/material'
+import { Paper, Stack } from '@mui/material'
 import {CardBodyProps} from '../interfaces'
 
 const cardBodyStyling = {
-  card: {
+  paper: {
+    '&.MuiPaper-rounded' : {
+      borderRadius: '8px'
+    }
+  },
+  stack: {
     padding: 3,
-    margin: 0,
+    margin: 0
   }
 }
-export const CardBody = ({children}:  CardBodyProps) => {
+export const CardBody = ({children, sx}:  CardBodyProps) => {
   return (
-    <Card>
-      <Stack sx={cardBodyStyling.card} 
-        height='16rem'
+    <Paper
+    elevation={2}
+      sx={{...cardBodyStyling.paper,...sx?.paper}}
+    >
+      <Stack sx={{...cardBodyStyling.stack, ...sx?.stack}} 
+        // height='12rem'
         justifyContent='space-between'
       >
         {children}
       </Stack>
-    </Card>
+    </Paper>
   )
 }
