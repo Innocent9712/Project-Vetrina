@@ -6,10 +6,11 @@ import { CardTop } from '../../../components/CardTop'
 import {CallMadeOutlined, TextSnippetOutlined} from '@mui/icons-material';
 import { LinkOut } from '../../../components/LinkOut'
 import { bingApi } from '../../../api'
+import { CardBody } from '../../../components/CardBody'
 
 const headlineStyling = {
     container : {padding: '15px'},
-    stackOne : {marginBottom: '3rem'},
+    stackOne : {marginBottom: '1.5rem'},
     boxOne: {
         padding: 0, 
         margin: 0, 
@@ -17,8 +18,7 @@ const headlineStyling = {
         justifyContent: 'flex-end'
     },
     gridOne : {
-        // height: '500px', 
-        // overflowX: 'auto'
+        marginBottom: "0.5rem"
     },
     childCard : {
         display: 'flex',
@@ -34,7 +34,7 @@ const headlineStyling = {
         textTransform: 'uppercase'
     },
     description : {fontSize: '1rem'},
-    read : {fontWeight: '300', fontSize: '0.7rem'},
+    read : {fontWeight: '400', fontSize: '0.6rem'},
 
 }
 
@@ -48,7 +48,7 @@ export const ArticleHeadlines = () => {
     }, [])
     
     return (
-        <Card sx={headlineStyling.container}>
+        <CardBody>
             <Stack justifyContent='space-between' direction='row' sx={headlineStyling.stackOne}>
                 <CardTop icon={<TextSnippetOutlined color='primary' />} title='Latest news' />
                 <Box width='33%' sx={headlineStyling.boxOne}>
@@ -81,10 +81,10 @@ export const ArticleHeadlines = () => {
                         id < 8 &&
                         <Grid item key={article.title} xs={4} md={3}>
                             <Stack direction='row' spacing={2} alignItems='center' sx={headlineStyling.stackTwo}>
-                                <Box width='20%'>
+                                <Box width='22%'>
                                     <img width='100%' src={article.img} alt={article.title} />
                                 </Box>
-                                <Stack spacing={1} height='4rem'>
+                                <Stack spacing={0.5} >
                                     <Typography variant='h5' sx={headlineStyling.title}>{article.title}</Typography>
                                     <Typography variant='body2' color='primary' sx={headlineStyling.description}>{article.description}</Typography>
                                     <Typography variant='body2' color='primary' sx={headlineStyling.read}>{article.readTime}</Typography>
@@ -94,6 +94,7 @@ export const ArticleHeadlines = () => {
                     ))
                 }
             </Grid>
-        </Card>
+        </CardBody>
+        // </Card>
     )
 }

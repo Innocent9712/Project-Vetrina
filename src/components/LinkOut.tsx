@@ -4,32 +4,26 @@ import {styled} from '@mui/material/styles'
 import {LinkProps} from '@mui/material/Link'
 import {LinkOutInterface} from '../interfaces'
 
-// interface StyledLinkProps extends LinkProps {
-//     color?: string;
-// }
-
-// const StyledLink = styled(Link, {
-//     shouldForwardProp: (prop) => prop
-// })<StyledLinkProps>(({color, theme}) => ({
-
-// }))
 
 const linkStyle = {
     button: {
         paddingInline: 0,
         textTransform: 'none',
+        display: 'flex',
+        justifyContent: "flex-start"
     },
     text: {
         marginRight: '10px',
         textAlign: 'left',
     }
 }
-export const LinkOut = ({text, icon, linkColor}: LinkOutInterface) => {
+export const LinkOut = ({text, icon, linkColor, font}: LinkOutInterface) => {
     return (
         <Button
             sx={{
                 ...linkStyle.button,
-                color: `${linkColor}`
+                color: `${linkColor}`,
+                ...(font && {fontSize: font})
             }}
         >
             <Link

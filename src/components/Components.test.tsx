@@ -3,13 +3,11 @@ import { VisitorBottom } from '../Layout/Main/DashboardContent/Visitor/VisitorBo
 import { VisitorContent } from '../Layout/Main/DashboardContent/Visitor/VisitorContent';
 import { VisitorTop } from '../Layout/Main/DashboardContent/Visitor/VisitorTop';
 import {CardBody} from './CardBody'
-import { StatisticCard } from './StatisticCard';
-
 
 test('should render the card body components', () => { 
     render(
         <CardBody>
-            <StatisticCard top={<VisitorTop />} content={<VisitorContent />} bottom={<VisitorBottom />} />
+            {/* Re write the test */}
         </CardBody>
     )
 

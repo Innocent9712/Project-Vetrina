@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
-import {Box, MenuItem, Select, Stack, Typography} from '@mui/material'
+import {Box, Button, Menu, MenuItem, Select, Stack, Typography} from '@mui/material'
 import {CardTopInterface} from '../interfaces'
-
+import { KeyboardArrowDownOutlined, KeyboardArrowUpOutlined } from '@mui/icons-material'
+import { grey } from '@mui/material/colors'
 const cardTopStyles = {
     container: {
         display: 'flex',
@@ -26,6 +27,19 @@ const cardTopStyles = {
 
 export const CardTop = (props: CardTopInterface) => {
     const [period, setPeriod] = useState <string | undefined>(props.period?.[0])
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+    const open = Boolean(anchorEl)
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget)
+    }
+    const handleClose = () => {
+        setAnchorEl(null)
+    }
+    const handleMenuClick = (value: string) => {
+        setPeriod(value)
+        handleClose()
+    }
+
     return (
         <Box
             sx={cardTopStyles.container}
@@ -38,13 +52,35 @@ export const CardTop = (props: CardTopInterface) => {
             </Stack>
             {
                 props.period &&
-                <Select value={period} sx={cardTopStyles.select}>
-                    {
-                        props.period.map(item => (
-                            <MenuItem key={item} value={item} onClick={()=> setPeriod(item)}>{item}</MenuItem>
-                        ))
-                    }
-                </Select>
+                <div>
+                    <Button
+                        id="select-button"
+                        onClick={handleClick}
+                        aria-expanded={open ? 'true' : undefined}
+                        aria-haspopup = "true"
+                        endIcon={open? <KeyboardArrowUpOutlined /> : <KeyboardArrowDownOutlined />}
+                        sx={{
+                            textTransform: 'none',
+                            color: 'grey.600'
+                        }}
+                    >
+                            {period}
+                    </Button>
+                    <Menu
+                            anchorEl={anchorEl}
+                            open={open}
+                            onClose={handleClose}
+                            MenuListProps={{
+                                'aria-labelledby' : 'select-button'
+                            }}
+                        >
+                            {
+                                props.period.map(item => (
+                                    <MenuItem key={item} value={item} onClick={()=> handleMenuClick(item)}>{item}</MenuItem>
+                                ))
+                            }
+                    </Menu>                 
+                </div>
             }
         </Box>
     )

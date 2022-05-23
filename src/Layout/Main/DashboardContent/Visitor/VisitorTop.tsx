@@ -2,7 +2,7 @@ import { VisibilityOutlined } from '@mui/icons-material'
 import React from 'react'
 import { CardTop } from '../../../../components/CardTop'
 
-const period = ['This Month', 'This Week', 'Today']
+const period = ['This month', 'This week', 'Today']
 
 export const VisitorTop = () => {
   return (
