@@ -6,7 +6,7 @@ import { ConfigShopTop } from './ConfigShopTop'
 
 export const Config = () => {
   return (
-    <CardBody sx={{stack: {minHeight: "250px"}}}>
+    <CardBody sx={{stack: {minHeight: "300px"}}}>
         <ConfigShopTop />
         <ConfigShopContent />
         <ConfigShopBottom />

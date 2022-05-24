@@ -6,7 +6,7 @@ import { ExtensionTop } from './ExtensionTop'
 
 export const Extension = () => {
   return (
-    <CardBody sx={{stack : {minHeight: "300px"}}}>
+    <CardBody sx={{stack : {minHeight: "350px"}}}>
         <ExtensionTop />
         <ExtensionContent />
         <ExtensionBottom />

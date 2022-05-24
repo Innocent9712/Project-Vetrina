@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
-import {AttachMoneyOutlined, BrushOutlined, CreditCardOutlined, HelpOutlineOutlined, LanguageOutlined, LocalShippingOutlined, LogoutOutlined, Menu, PersonOutlineOutlined, RadarOutlined, SettingsOutlined, ShareOutlined, VisibilityOutlined, WidgetsOutlined} from '@mui/icons-material'
+import {AttachMoneyOutlined, BrushOutlined, CreditCardOutlined, ExpandLess, HelpOutlineOutlined, LanguageOutlined, LocalShippingOutlined, LogoutOutlined, Menu, PersonOutlineOutlined, RadarOutlined, SettingsOutlined, ShareOutlined, VisibilityOutlined, WidgetsOutlined} from '@mui/icons-material'
 import {useTheme, styled} from '@mui/material/styles'
-import {Divider, Drawer,List, ListItem, ListItemText, IconButton, Accordion, AccordionSummary, AccordionDetails, Badge, Box, Stack, Typography, Select, MenuItem } from '@mui/material'
+import {Divider, Drawer,List, ListItem, ListItemText, IconButton, Accordion, AccordionSummary, AccordionDetails, Badge, Box, Stack, Typography, Select, MenuItem, ListItemButton, Collapse } from '@mui/material'
 import { ListItemIcon } from '@mui/material'
 import {ExpandMore, HomeOutlined, ShoppingCartOutlined, FormatListBulletedOutlined } from '@mui/icons-material'
-import { SubItemsType, DrawerList, NavPropsInterface } from '../../interfaces'
+import { SubItemsType, SubItems, DrawerList, NavPropsInterface } from '../../interfaces'
 import logo from '../../assets/logo.svg'
 import { Link } from 'react-router-dom'
 
@@ -154,15 +154,25 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     }
   ]
 
+  
+// .css-3st75a-MuiButtonBase-root-MuiListItem-root
+
   const sideNavStyling = {
     drawer : {
       width: drawerWidth,
       flexShrink: 0,
-      '&.MuiDrawer-paper': {
+      '& .MuiDrawer-paper': {
         width: drawerWidth,
         boxSizing: 'border-box',
         '&::-webkit-scrollbar': {
-          width: '5px'
+          width: '3px',
+        },
+        '&::-webkit-scrollbar-track' : {
+          bgcolor: 'rgba(10, 37, 64, 0.32)'
+        },
+        '&::-webkit-scrollbar-thumb' : {
+          bgcolor: 'primary.main',
+          height: '10px'
         }
       },
     },
@@ -202,13 +212,41 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     acDetailListItem : {
       marginLeft: '40px',
     },
-    listItem : {margin: '10px'},
+    listItem : {
+      paddingBlock: '5px',
+      paddingInline: 1
+    },
+    text: {
+      fontSize: '0.9rem'
+    },
     listItemIcon : {'&.MuiListItemIcon-root' : {minWidth: '30px'}},
-    badge: {marginLeft: '120px'},
+    badge: {
+      // marginLeft: '-50px'
+      '& .MuiBadge-badge' : {
+        position: 'static',
+        transform: 'none',
+      }
+    },
     active: {
       color: 'secondary'
     }
 
+  }
+
+  const subList = {
+    stack: {
+      width: '100%',
+      paddingBlock: '5px',
+      '&.MuiStack-root' : {
+        width: '100%',
+        paddingLeft: 0,
+      },
+      '&.MuiButtonBase-root.MuiListItemButton-root' : {
+        paddingLeft: '8px',
+        paddingRight: '8px',
+      }
+    },
+    listItemButton: { pl: 5, pt: 0.5, pb: 0.5 , width:'100%'},
   }
 
 
@@ -217,10 +255,10 @@ export const SideNav  = ({sideState, handleState, changeHeader} : NavPropsInterf
   const [currentPage, setCurrentPage] = useState('/')
 
   const handleClick = (name: string, path: string) => {
+    console.log(path);    
     setCurrentPage(path)
     changeHeader?.(name, path)
   }
-
 
     return (
       <Drawer
@@ -247,52 +285,15 @@ export const SideNav  = ({sideState, handleState, changeHeader} : NavPropsInterf
             >
               {
                 item.subItems ? (
-                    <Accordion disableGutters
-                      sx={sideNavStyling.accordion}
-                    >
-                      <AccordionSummary
-                        expandIcon={<ExpandMore />}
-                        sx={sideNavStyling.acSummary}
-                      >
-                        <Stack alignItems='center' direction='row'>
-                          <ListItemIcon sx={sideNavStyling.listItemIcon}>
-                            {item.icon}
-                          </ListItemIcon>
-                          <ListItemText 
-                            primary={item.name} 
-                            primaryTypographyProps={{color: 'primary'}}
-                            color='primary'
-                          />
-                        </Stack>
-                      </AccordionSummary>
-                      <AccordionDetails
-                        sx={sideNavStyling.acDetailContainer}
-                      >
-                        <List sx={sideNavStyling.acDetailList}>
-                          {
-                            item.subItems.map((subItem: SubItemsType) => (
-                              <Box width='100%'height='50px' sx={sideNavStyling.acDetailBox} key={subItem.name}>
-                                  <ListItemText 
-                                  primary={subItem.name}
-                                  primaryTypographyProps={{color: 'primary'}}
-                                  color='primary'
-                                  sx={sideNavStyling.acDetailListItem}
-                                  onClick={()=> handleClick(subItem?.name, subItem?.path!)}
-                                  />
-                              </Box>
-                            ))
-                          }
-                        </List>
-                      </AccordionDetails>
-                    </Accordion>
+                  <SubItemComponent title={item.name} icon={item.icon} subItems={item.subItems} subHandleClick={handleClick} activePage={currentPage} />
                 ) : (
-                  <Stack direction='row' sx={sideNavStyling.listItem} alignItems='center' onClick={()=> handleClick(item?.name, item?.path!)}>
+                  <Stack width='100%' direction='row' sx={sideNavStyling.listItem} alignItems='center' onClick={()=> handleClick(item?.name, item?.path!)}>
                         <ListItemIcon sx={sideNavStyling.listItemIcon}>
                           {item.icon}
                         </ListItemIcon>
-                        <ListItemText primary={item.name}  primaryTypographyProps={{color: 'primary'}} />
+                        <ListItemText primary={item.name}  primaryTypographyProps={{color: 'primary', ...sideNavStyling.text}} />
                         {
-                          item.badge && <Badge sx={sideNavStyling.badge}badgeContent={item.badge} color='success' />
+                          item.badge && <Badge sx={sideNavStyling.badge} badgeContent={item.badge} color='success' />
                         }
                   </Stack>
                 )
@@ -302,22 +303,22 @@ export const SideNav  = ({sideState, handleState, changeHeader} : NavPropsInterf
         </List>
         <Divider />
         <List>
-          {ExtraItems.map((item, index) => (
-            <ListItem 
-              button 
-              disablePadding
-              disableGutters
-              key={item.name} 
+          {ExtraItems.map((item, index) => ( 
+            <ListItem button key={item.name}
+            disablePadding
+            disableGutters
+            sx={{...sideNavStyling.listItem,...(currentPage === item.path && sideNavStyling.activeListItem)}}
+
               onClick={()=> handleClick(item?.name, item?.path!)}
-              sx={{...sideNavStyling.listItem,...(currentPage === item.path && sideNavStyling.activeListItem), paddingLeft: 0}}
+              // sx={{...sideNavStyling.listItem,...(currentPage === item.path && sideNavStyling.activeListItem), paddingLeft: 0}}
             >
-               <Stack direction='row' sx={sideNavStyling.listItem} alignItems='center' onClick={()=> handleClick(item?.name, item?.path!)}>
+               <Stack direction='row' alignItems='center' sx={sideNavStyling.listItem} onClick={()=> handleClick(item?.name, item?.path!)}>
                         <ListItemIcon sx={sideNavStyling.listItemIcon}>
                           {item.icon}
                         </ListItemIcon>
-                        <ListItemText primary={item.name}  primaryTypographyProps={{color: 'primary'}} />
+                        <ListItemText primary={item.name}  primaryTypographyProps={{color: 'primary', ...sideNavStyling.text}} />
                         {
-                          item.badge && <Badge sx={sideNavStyling.badge}badgeContent={item.badge} color='success' />
+                          item.badge && <Badge sx={sideNavStyling.badge} badgeContent={item.badge} color='success' />
                         }
                   </Stack>
             </ListItem>
@@ -331,4 +332,55 @@ export const SideNav  = ({sideState, handleState, changeHeader} : NavPropsInterf
         </Stack>
       </Drawer>
     )
+}
+
+
+
+const SubItemComponent = ({icon, title, subItems, subHandleClick, activePage}: SubItems) => {
+  const [open, setOpen] = useState(false)
+  const [subActive, setSubActive] = useState('')
+
+  const handleClick= () => 
+  {
+    setOpen(!open)
+  }
+
+  return (
+
+    <Stack width='100%' >
+      <ListItemButton onClick={handleClick}
+      disableRipple
+        sx={{
+          ...subList.stack,
+          ...(activePage === subActive && sideNavStyling.activeListItem)
+        }}
+      >
+      <ListItemIcon sx={sideNavStyling.listItemIcon}>
+        {icon}
+      </ListItemIcon>
+      <ListItemText primary={title}  primaryTypographyProps={{color: 'primary', ...sideNavStyling.text}} />
+      {open ? <ExpandLess /> : <ExpandMore />}
+    </ListItemButton>
+    <Collapse in={open} timeout="auto" unmountOnExit>
+      <List component="div" disablePadding>
+      {
+        subItems.map((item: SubItemsType) => (
+          <ListItemButton 
+            sx={subList.listItemButton}
+            onClick={()=> {
+              setSubActive(item?.path!)
+              subHandleClick(item?.name, item?.path!)
+            }}
+          >
+            <ListItemText 
+              primary={item.name}  
+              primaryTypographyProps={{color: 'primary', ...sideNavStyling.text}} 
+            />
+          </ListItemButton>
+        ))
+      }
+      </List>
+    </Collapse>
+    </Stack>
+  )
 }

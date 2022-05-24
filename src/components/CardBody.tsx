@@ -9,7 +9,9 @@ const cardBodyStyling = {
     }
   },
   stack: {
-    padding: 3,
+    paddingInline: 3,
+    paddingTop: 2.5,
+    paddingBottom: 2,
     margin: 0
   }
 }

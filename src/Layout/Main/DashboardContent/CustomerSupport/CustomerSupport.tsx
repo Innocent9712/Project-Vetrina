@@ -5,7 +5,7 @@ import { CStop } from './CStop'
 
 export const CustomerSupport = () => {
   return (
-    <CardBody sx={{stack: {minHeight: '100px'}}}>
+    <CardBody sx={{stack: {minHeight: '120px'}}}>
         <CStop />
         <CSContent />
     </CardBody>

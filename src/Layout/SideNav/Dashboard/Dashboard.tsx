@@ -16,13 +16,17 @@ const DashboardStyling = {
     appBar : {
         bgcolor: '#fff',
         boxShadow: 0,
-        paddingInline: 2
+        // paddingInline: 2
     },
     toolBar: {
         display: 'flex',
         justifyContent: 'space-between',
         marginInline: 'auto',
         width: '80vw',
+        '&.MuiToolbar-root': {
+            paddingLeft: 0,
+            paddingRight: 0,
+        }
         // maxWidth: '1500px',
     },
     title: {
@@ -55,7 +59,7 @@ const AppBar = styled(MuiAppBar, {
 
 export const Dashboard = ({sideState, handleState, headerText}:  NavPropsInterface) => {
     return (
-        <AppBar position='sticky' open={sideState}
+        <AppBar position='fixed' open={sideState}
             sx={DashboardStyling.appBar}
         >
             <Toolbar

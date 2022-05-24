@@ -7,7 +7,7 @@ import { Stack } from '@mui/material'
 
 export const Order = () => {
   return (
-    <CardBody sx={{stack: {minHeight: "180px"}}}>
+    <CardBody sx={{stack: {minHeight: "200px"}}}>
       <OrdersTop />
       <OrderContent />
       <OrdersBottom />
