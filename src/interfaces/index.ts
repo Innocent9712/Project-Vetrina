@@ -54,6 +54,14 @@ export interface DrawerList {
     badge?: number;
     path?: string;
     }
+
+export    interface SubItems {
+        icon:  React.ReactNode;
+        title: string;
+        subItems: SubItemsType[];
+        subHandleClick: (name: string, path: string) => void;
+        activePage: string;
+      }
 export interface NavPropsInterface {
     sideState: boolean;
     handleState: ()=> void;

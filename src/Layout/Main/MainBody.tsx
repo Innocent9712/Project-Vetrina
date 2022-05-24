@@ -12,7 +12,8 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   open?: boolean;
 }>(({ theme, open }) => ({
   flexGrow: 1,
-  padding: theme.spacing(1),
+  // padding: theme.spacing(1),
+  paddingTop: theme.spacing(8),
   transition: theme.transitions.create('margin', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -23,13 +24,13 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    marginLeft: 4,
+    marginLeft: 0,
   }),
 }));
 
 const mainStyles = {
   container: {
-    marginLeft: '235px',
+    // marginLeft: '235px',
   },
   innerContainer: {
     // maxWidth: '1200px', 

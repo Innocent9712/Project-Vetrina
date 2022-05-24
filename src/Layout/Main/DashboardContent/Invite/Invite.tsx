@@ -6,7 +6,7 @@ import { InviteTop } from './InviteTop'
 
 export const Invite = () => {
   return (
-    <CardBody sx={{stack: {minHeight: '180px'}}}>
+    <CardBody sx={{stack: {minHeight: '220px'}}}>
         <InviteTop />
         <InviteContent />
         <InviteBottom />

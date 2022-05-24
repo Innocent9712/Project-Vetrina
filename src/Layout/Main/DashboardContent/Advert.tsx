@@ -19,7 +19,7 @@ const advertStyling = {
 
 export const Advert = () => {
   return (
-    <CardBody sx={{paper: {bgcolor: '#F3A35C', }, stack: {minHeight: "300px"}}}>
+    <CardBody sx={{paper: {bgcolor: '#F3A35C', }, stack: {minHeight: "350px"}}}>
          <Stack
             direction='row'
             justifyContent='space-between'

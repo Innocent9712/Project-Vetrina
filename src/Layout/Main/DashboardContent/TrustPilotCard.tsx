@@ -14,7 +14,7 @@ const trustPilotStyling = {
 
 export const TrustPilotCard = () => {
   return (
-        <CardBody sx={{paper: {...trustPilotStyling.container}, stack: {minHeight: '180px'}}}>
+        <CardBody sx={{paper: {...trustPilotStyling.container}, stack: {minHeight: '220px'}}}>
             <Box>
                 <img src={trustPilotLogo} alt='trust pilot logo' />
             </Box>

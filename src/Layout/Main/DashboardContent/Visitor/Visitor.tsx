@@ -7,7 +7,7 @@ import { VisitorTop } from './VisitorTop'
 
 export const Visitor = () => {
   return (
-    <CardBody sx={{stack: {minHeight: "180px"}}}>
+    <CardBody sx={{stack: {minHeight: "200px"}}}>
       <VisitorTop />
       <VisitorContent />
       <VisitorBottom />
