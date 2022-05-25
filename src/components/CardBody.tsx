@@ -18,7 +18,7 @@ const cardBodyStyling = {
 export const CardBody = ({children, sx}:  CardBodyProps) => {
   return (
     <Paper
-    elevation={2}
+    elevation={3}
       sx={{...cardBodyStyling.paper,...sx?.paper}}
     >
       <Stack sx={{...cardBodyStyling.stack, ...sx?.stack}} 

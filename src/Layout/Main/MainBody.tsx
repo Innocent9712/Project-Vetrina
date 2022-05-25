@@ -31,6 +31,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
 const mainStyles = {
   container: {
     // marginLeft: '235px',
+    marginBottom: 4,
   },
   innerContainer: {
     // maxWidth: '1200px', 

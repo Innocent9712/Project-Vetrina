@@ -6,7 +6,6 @@ import { ListItemIcon } from '@mui/material'
 import {ExpandMore, HomeOutlined, ShoppingCartOutlined, FormatListBulletedOutlined } from '@mui/icons-material'
 import { SubItemsType, SubItems, DrawerList, NavPropsInterface } from '../../interfaces'
 import logo from '../../assets/logo.svg'
-import { Link } from 'react-router-dom'
 
 const drawerWidth = 240
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -214,7 +213,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     },
     listItem : {
       paddingBlock: '5px',
-      paddingInline: 1
+      paddingInline: 2,
     },
     text: {
       fontSize: '0.9rem'
@@ -242,11 +241,11 @@ const DrawerHeader = styled('div')(({ theme }) => ({
         paddingLeft: 0,
       },
       '&.MuiButtonBase-root.MuiListItemButton-root' : {
-        paddingLeft: '8px',
-        paddingRight: '8px',
+        paddingLeft: 2,
+        paddingRight: 2,
       }
     },
-    listItemButton: { pl: 5, pt: 0.5, pb: 0.5 , width:'100%'},
+    listItemButton: { pl: 5, pt: 0.5, pb: 0.5 , width:'100%', bgcolor: '#E9F8FE'},
   }
 
 
@@ -281,7 +280,7 @@ export const SideNav  = ({sideState, handleState, changeHeader} : NavPropsInterf
             <ListItem button key={item.name}
               disablePadding
               disableGutters
-              sx={{...sideNavStyling.listItem,...(currentPage === item.path && sideNavStyling.activeListItem)}}
+              sx={{...(currentPage === item.path && sideNavStyling.activeListItem)}}
             >
               {
                 item.subItems ? (
@@ -307,10 +306,9 @@ export const SideNav  = ({sideState, handleState, changeHeader} : NavPropsInterf
             <ListItem button key={item.name}
             disablePadding
             disableGutters
-            sx={{...sideNavStyling.listItem,...(currentPage === item.path && sideNavStyling.activeListItem)}}
+            sx={{...(currentPage === item.path && sideNavStyling.activeListItem)}}
 
               onClick={()=> handleClick(item?.name, item?.path!)}
-              // sx={{...sideNavStyling.listItem,...(currentPage === item.path && sideNavStyling.activeListItem), paddingLeft: 0}}
             >
                <Stack direction='row' alignItems='center' sx={sideNavStyling.listItem} onClick={()=> handleClick(item?.name, item?.path!)}>
                         <ListItemIcon sx={sideNavStyling.listItemIcon}>
@@ -366,7 +364,8 @@ const SubItemComponent = ({icon, title, subItems, subHandleClick, activePage}: S
       {
         subItems.map((item: SubItemsType) => (
           <ListItemButton 
-            sx={subList.listItemButton}
+          key={item.name}
+            sx={{...subList.listItemButton, ...(activePage === item.path && {bgcolor: 'primary.contractText'})}}
             onClick={()=> {
               setSubActive(item?.path!)
               subHandleClick(item?.name, item?.path!)
@@ -374,7 +373,7 @@ const SubItemComponent = ({icon, title, subItems, subHandleClick, activePage}: S
           >
             <ListItemText 
               primary={item.name}  
-              primaryTypographyProps={{color: 'primary', ...sideNavStyling.text}} 
+              primaryTypographyProps={{color: 'primary', ...sideNavStyling.text, ...(activePage === item.path && {color: 'primary.light'})}} 
             />
           </ListItemButton>
         ))
