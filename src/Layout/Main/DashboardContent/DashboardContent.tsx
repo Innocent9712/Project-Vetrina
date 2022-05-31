@@ -13,7 +13,7 @@ import { CustomerSupport } from './CustomerSupport/CustomerSupport'
 
 const dashboardStyling = {
     stackOne : {
-        background: 'linear-gradient(180deg, rgba(33,184,249,1) 5%, rgba(33,184,249,1) 10%, rgba(255,255,255,1) 20%)',
+        background: 'linear-gradient(180deg, rgba(33,184,249,1) 5%, rgba(33,184,249,0.3) 15%, rgba(255,255,255,1) 15%)',
     },
 }
 

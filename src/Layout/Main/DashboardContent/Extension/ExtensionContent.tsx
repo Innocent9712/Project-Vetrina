@@ -6,8 +6,6 @@ import { ItemInterface } from '../../../../interfaces'
 
 const items: ItemInterface[] =  [
     {
-        // icon: <img src={domain} alt='domain' />,
-        // icon: 'domain',
         icon: <img src={domain} alt={domain} />,
         text: 'Connect your own domain',
         backColor: '#FFA26B'
@@ -16,23 +14,62 @@ const items: ItemInterface[] =  [
         text: '50 Additional products',
         title: '+50 Produtti',
         backColor: '#00C48C'
-    }
+    },
+    {
+
+        icon: <img src={domain} alt={domain} />,
+        text: 'Connect your own domain',
+        backColor: '#FFA26B'
+    },
+    {
+        text: '50 Additional products',
+        title: '+50 Produtti',
+        backColor: '#00C48C'
+    },
 ]
+
+const styles = {
+    container: {
+        width: '100%',
+        margin: 0,
+        // bgcolor: '#f3f3f3',
+        overflowY: 'auto',
+        padding: '12px 0',
+        '&::-webkit-scrollbar': {
+            width: 0,
+        },
+    },
+    list_container : {
+        marginInline: '1rem'
+    },
+    list_item_container : {
+        marginRight: '10px',
+        borderRadius: '10px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    item_text: {
+        textAlign: 'center', 
+        fontWeight: '600', 
+        letterSpacing: '0.08rem', 
+        width: "70%", 
+        marginInline: 'auto'
+    },
+    item_description : {
+        fontSize: '0.8rem',
+        width: '70%',
+        fontWeight: '500',
+    }
+    
+}
 export const ExtensionContent = () => {
   return (
     <Box 
-        sx={{
-            width: '100%',
-            margin: 0,
-            bgcolor: '#f3f3f3',
-            overflowY: 'auto',
-            padding: '12px 0'
-        }}
+        sx={styles.container}
     >
         <Stack direction='row'
-            sx={{
-                marginInline: '1rem'
-            }}
+            sx={styles.list_container}
             spacing={3}
         >
             {
@@ -42,32 +79,29 @@ export const ExtensionContent = () => {
                             width='7rem'
                             height='7rem'
                             bgcolor={item.backColor}
-                            sx={{
-                                marginRight: '10px',
-                                borderRadius: '10px',
-                            }}
+                            sx={styles.list_item_container}
                         >
-                            <Box width='50%'
-                                sx={{
-                                    margin: '20% auto',
-                                }}
+                            <Box 
                             >
                                 {
                                     item.icon ? (
                                         item.icon
                                     ) : (
-                                        <Typography variant='body1' sx={{textAlign: 'center', fontWeight: '600', letterSpacing: '0.08rem',}} color='primary.contrastText'>{item.title}</Typography>
+                                        <Typography 
+                                            variant='body1' 
+                                            sx={styles.item_text} 
+                                            textAlign='center' 
+                                            color='primary.contrastText'
+                                        >
+                                            {item.title}
+                                        </Typography>
                                     )
                                 }
                                 
                             </Box>
                         </Box>
                         <Typography variant='body2'
-                            sx={{
-                                fontSize: '0.8rem',
-                                width: '70%',
-                                fontWeight: '500',
-                            }}
+                            sx={styles.item_description}
                             color='primary'
                         >{item.text}</Typography>
                     </Stack>

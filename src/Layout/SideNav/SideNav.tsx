@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
-import {AttachMoneyOutlined, BrushOutlined, CreditCardOutlined, ExpandLess, HelpOutlineOutlined, LanguageOutlined, LocalShippingOutlined, LogoutOutlined, Menu, PersonOutlineOutlined, RadarOutlined, SettingsOutlined, ShareOutlined, VisibilityOutlined, WidgetsOutlined} from '@mui/icons-material'
+import {ExpandMore, ExpandLess, Menu} from '@mui/icons-material'
 import {useTheme, styled} from '@mui/material/styles'
-import {Divider, Drawer,List, ListItem, ListItemText, IconButton, Accordion, AccordionSummary, AccordionDetails, Badge, Box, Stack, Typography, Select, MenuItem, ListItemButton, Collapse } from '@mui/material'
+import {Divider, Drawer,List, ListItem, ListItemText, IconButton, Badge, Box, Stack, Typography, Select, MenuItem, ListItemButton, Collapse } from '@mui/material'
 import { ListItemIcon } from '@mui/material'
-import {ExpandMore, HomeOutlined, ShoppingCartOutlined, FormatListBulletedOutlined } from '@mui/icons-material'
 import { SubItemsType, SubItems, DrawerList, NavPropsInterface } from '../../interfaces'
 import logo from '../../assets/logo.svg'
+import { DrawerItems, ExtraItems } from '../../data'
 
 const drawerWidth = 240
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -16,142 +16,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
   }));
-
-
-  
-
-  const DrawerItems: DrawerList[] = [
-    {
-      name: "Dashboard",
-      icon: <HomeOutlined color='primary' />,
-      path: '/'
-    },
-    {
-      name: "Catalogue",
-      icon: <ShoppingCartOutlined color='primary' />,
-      subItems: [
-        {
-          name: "Catalog 1",
-          path: '/catalog-1'
-        },
-        {
-          name: "Catalog 2",
-          path: '/catalog-2'
-        }
-      ]
-    },
-    {
-      name: "Order",
-      icon: <FormatListBulletedOutlined color='primary' />,
-      badge: 14,
-      path: '/order'
-    },
-    {
-      name: "Customers",
-      icon: <PersonOutlineOutlined color='primary' />,
-      path: 'customer'
-    },
-    {
-      name: "Marketing",
-      icon: <RadarOutlined color='primary' />,
-      subItems: [
-        {
-          name: "Discount codes",
-          path: 'discount-codes'
-        },
-        {
-          name: "Exit intent",
-          path: 'exit-intent'
-        },
-        {
-          name: "Checkout Features",
-          path: 'checkout-features'
-        },
-        {
-          name: "Post purchase conversion",
-          path: 'post-purchase-conversion'
-        },
-        {
-          name: "Cart abandonment",
-          path: '/abandoned-cart'
-        },
-        {
-          name: "Timer checkout",
-          path:'/timer-checkout'
-        },
-        {
-          name: "Self on Social",
-          path: '/self-on-social'
-        },
-        {
-          name: "Special Offer",
-          path: '/special-offer'
-        },
-        {
-          name: "Seasonal Offer",
-          path: '/seasonal-offer'
-        }
-      ]
-    },
-    {
-      name: "Delivery Option",
-      icon: <LocalShippingOutlined color='primary' />,
-      path: '/delivery-option'
-    },
-    {
-      name: " Payment Option",
-      icon: <AttachMoneyOutlined color='primary' />,
-      path: '/payment-option'
-    },
-    {
-      name: "Store Design",
-      icon: <BrushOutlined color='primary' />,
-      path: '/store-design'
-    },
-    {
-      name: "Subscription",
-      icon: <CreditCardOutlined color='primary' />,
-      path: '/subscription'
-    },
-    {
-      name: "Integration",
-      icon: <LanguageOutlined color='primary' />,
-      path: '/integration'
-    },
-    {
-      name: "Extensions",
-      icon: <WidgetsOutlined color='primary' />,
-      path: '/extensions'
-    },
-    {
-      name: "Settings",
-      icon: <SettingsOutlined color='primary' />,
-      path: '/settings'
-    },
-    {
-      name: "Log out",
-      icon: <LogoutOutlined color='primary' />,
-      path: '/logout'
-    },
-  ]
-
-  const ExtraItems: DrawerList[] = [
-    {
-      name: "Customer Support",
-      icon: <HelpOutlineOutlined color='primary' />,
-      path: 'customer-support'
-    },
-    {
-      name: "Share your shop",
-      icon: <ShareOutlined color='primary' />,
-      path: 'share-your-shop'
-    },
-    {
-      name: "View your shop",
-      icon: <VisibilityOutlined color='primary' />,
-      path: 'view-your-shop'
-    }
-  ]
 
   
 // .css-3st75a-MuiButtonBase-root-MuiListItem-root
@@ -164,15 +28,16 @@ const DrawerHeader = styled('div')(({ theme }) => ({
         width: drawerWidth,
         boxSizing: 'border-box',
         '&::-webkit-scrollbar': {
-          width: '3px',
+          width: 0,
+          // width: '3px',
         },
-        '&::-webkit-scrollbar-track' : {
-          bgcolor: 'rgba(10, 37, 64, 0.32)'
-        },
-        '&::-webkit-scrollbar-thumb' : {
-          bgcolor: 'primary.main',
-          height: '10px'
-        }
+        // '&::-webkit-scrollbar-track' : {
+        //   bgcolor: 'rgba(10, 37, 64, 0.32)'
+        // },
+        // '&::-webkit-scrollbar-thumb' : {
+        //   bgcolor: 'primary.main',
+        //   height: '10px'
+        // }
       },
     },
     DHeader : {
@@ -188,37 +53,17 @@ const DrawerHeader = styled('div')(({ theme }) => ({
         color: 'primary.light'
       },
     },
-    accordion : {
-      boxShadow: 0,
-      width: '100%',
-    },
-    acSummary : {
-      paddingRight: '20px',
-      marginInline: '10px',
-      '&.MuiButtonBase-root.MuiAccordionSummary-root' : {
-        paddingLeft: 0,
-      }
-    },
-    acDetailContainer : {
-      padding: 0,
-    },
-    acDetailList : {margin: 0},
-    acDetailBox : {
-      bgcolor: '#E9F8FE',
-      display: 'flex',
-      alignItems: 'center'
-    },
-    acDetailListItem : {
-      marginLeft: '40px',
-    },
+
     listItem : {
       paddingBlock: '5px',
-      paddingInline: 2,
+      paddingRight: 1.5,
+      paddingLeft: 2,
     },
     text: {
       fontSize: '0.9rem'
     },
-    listItemIcon : {'&.MuiListItemIcon-root' : {minWidth: '30px'}},
+    listItemIcon : {
+      '&.MuiListItemIcon-root' : {minWidth: '35px'}},
     badge: {
       // marginLeft: '-50px'
       '& .MuiBadge-badge' : {
@@ -242,10 +87,10 @@ const DrawerHeader = styled('div')(({ theme }) => ({
       },
       '&.MuiButtonBase-root.MuiListItemButton-root' : {
         paddingLeft: 2,
-        paddingRight: 2,
+        paddingRight: 1.5,
       }
     },
-    listItemButton: { pl: 5, pt: 0.5, pb: 0.5 , width:'100%', bgcolor: '#E9F8FE'},
+    listItemButton: { pl: 6.5, pt: 0.5, pb: 0.5 , width:'100%', bgcolor: '#E9F8FE'},
   }
 
 
@@ -275,7 +120,9 @@ export const SideNav  = ({sideState, handleState, changeHeader} : NavPropsInterf
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List>
+        <List sx={{'&.MuiList-root': {
+          paddingTop: 0
+        }}}>
           {DrawerItems.map((item: DrawerList) => (
             <ListItem button key={item.name}
               disablePadding

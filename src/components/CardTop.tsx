@@ -60,6 +60,7 @@ export const CardTop = (props: CardTopInterface) => {
                         aria-haspopup = "true"
                         endIcon={open? <KeyboardArrowUpOutlined /> : <KeyboardArrowDownOutlined />}
                         sx={{
+                            paddingRight: 0,
                             textTransform: 'none',
                             color: 'grey.600'
                         }}
