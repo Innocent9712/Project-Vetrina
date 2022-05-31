@@ -76,8 +76,8 @@ export const ExtensionContent = () => {
                 items.map(item=> (
                     <Stack spacing={1} key={item.text}>
                         <Box
-                            width='7rem'
-                            height='7rem'
+                            width='8rem'
+                            height='8rem'
                             bgcolor={item.backColor}
                             sx={styles.list_item_container}
                         >
