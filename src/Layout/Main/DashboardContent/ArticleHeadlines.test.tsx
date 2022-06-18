@@ -1,4 +1,4 @@
-import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import { DefaultRequestBody, rest } from 'msw'
 import { setupServer } from 'msw/node'
 import { ResponseInterface } from '../../../interfaces'
@@ -18,18 +18,18 @@ let resourceStatus = true;
 
 
 const server = setupServer(
-    rest.get<DefaultRequestBody, SampleInterface>('https://bing-news-search1.p.rapidapi.com/news/trendingtopics',(req, res, ctx) => {
+    rest.get<DefaultRequestBody, SampleInterface>('https://bing-news-search1.p.rapidapi.com/news/trendingtopics?textFormat=Raw&safeSearch=Off',(req, res, ctx) => {
         // req.url.searchParams.getAll('textFormat=Raw&safeSearch=Off')
         return res(
             ctx.status(200),
-            ctx.json({
+            ctx.json([{
                 id: '1',
                 title: 'Fake Title',
                 img: 'https://fakeImage.com',
                 description: 'Fake description',
                 url: 'http://fakeUrl.com',
                 readTime: 'Estimated reading: 5 mins'
-            })
+            }])
         )
     })
 )
@@ -44,10 +44,14 @@ describe('Mount Article Headline component and', () => {
     })
     it('check that the skeleton loading placeholder is there',async () => {
         screen.queryByTestId(/skeleton/i)
+        // await waitForElementToBeRemoved(screen.queryByTestId(/skeleton/i))
     })
 
-    it('checks that api response is received', () => {
+    it('checks that api response is received', async () => {
         // await waitForElementToBeRemoved(screen.queryByTestId(/skeleton/i))
-        expect(screen.getByText('Fake Title')).toBeInTheDocument()
+        // await screen.findByText(/Fake/)
+        await waitFor(()=> expect(screen.findByText(/Fake/)).toBeInTheDocument())
+        // expect(item).toBeInTheDocument()
+        // screen.debug()
     })
  })
